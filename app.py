@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import eventlet
+import os
 from flask import Flask, render_template
 from flask_mqtt import Mqtt
 from flask_socketio import SocketIO
@@ -7,16 +8,19 @@ from flask_socketio import SocketIO
 eventlet.monkey_patch()
 
 app = Flask(__name__)
-app.config['MQTT_BROKER_URL'] = 'test.mosquitto.org'
-app.config['MQTT_BROKER_PORT'] = 1883
+app.config['MQTT_BROKER_URL'] = os.environ["MQTT_BROKER_URL"]
+app.config['MQTT_BROKER_PORT'] = int(os.environ["MQTT_BROKER_PORT"])
 app.config['MQTT_REFRESH_TIME'] = 1.0
+app.config['MQTT_USERNAME'] = os.environ["MQTT_USERNAME"]
+app.config['MQTT_PASSWORD'] = os.environ["MQTT_PASSWORD"]
 
 mqtt = Mqtt(app)
 socketio = SocketIO(app)
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    mqtt.subscribe('bbc/subtitles/+/compacted')
+    print(os.environ["MQTT_BROKER_URL"])
+    mqtt.subscribe('#')
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
