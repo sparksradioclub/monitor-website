@@ -1,3 +1,4 @@
 eventlet
 flask-socketio
 flask-mqtt
+gunicorn
