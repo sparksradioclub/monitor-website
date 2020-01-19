@@ -13,7 +13,7 @@
 
             // listen for mqtt_message events
             // when a new message is received, log and append the data to the page
-            socket.on('mqtt_all', function(data) {
+            socket.on('mqtt_index', function(data) {
                 if (data['topic'] == 'monitor/datetime/localtime') {
                     $('#localtime').html(data['payload']);
                 }
