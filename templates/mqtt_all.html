@@ -5,7 +5,6 @@
     </head>
     <body>
         <h2>MW0SML - Sparks monitor</h2>
-        <p><b>Local time</b>: <span id="localtime"></span></p>
         <div id="subscribe_messages"></div>
         <script type="text/javascript" charset="utf-8">
           $(document).ready(function() {
@@ -14,9 +13,9 @@
             // listen for mqtt_message events
             // when a new message is received, log and append the data to the page
             socket.on('mqtt_all', function(data) {
-                if (data['topic'] == 'monitor/datetime/localtime') {
-                    $('#localtime').html(data['payload']);
-                }
+              console.log(data);
+              var text = '<b>' + data['topic'] + '</b> ' + data['payload'];
+              $('#subscribe_messages').append(text + '<br>');
             })
           });
         </script>

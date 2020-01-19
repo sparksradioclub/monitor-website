@@ -35,6 +35,10 @@ def handle_mqtt_message(client, userdata, message):
 def index():
     return render_template('index.html')
 
+@app.route('/mqtt_all')
+def mqtt_all():
+    return render_template('mqtt_all.html')
+
 @mqtt.on_log()
 def handle_logging(client, userdata, level, buf):
     print(level, buf)
