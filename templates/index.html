@@ -15,7 +15,7 @@
             socket.on('mqtt_message', function(data) {
               console.log(data);
               var text = '<b>' + data['topic'] + '</b> ' + data['payload'];
-              $('#subscribe_messages').append(text + '<br><br>');
+              $('#subscribe_messages').append(text + '<br>');
             })
           });
         </script>
