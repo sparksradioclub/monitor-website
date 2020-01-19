@@ -5,7 +5,20 @@
     </head>
     <body>
         <h2>MW0SML - Sparks monitor</h2>
+        <p><b>Last MQTT message</b>: <span id="lastmessage"></span></p>
         <p><b>Local time</b>: <span id="localtime"></span></p>
+
+        <table border="1">
+            <tr>
+                <th>Cabin</th><th>Room</th><th>Voltage</th><th>Frequency</th><th>Current</th><th>Power</th>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>Radio room 1</td><td><span id="room1voltage"></span></td><td><span id="room1frequency"></span></td><td><span id="room1current"></span></td><td><span id="room1power"></span></td>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>Radio room 2</td><td><span id="room2voltage"></span></td><td><span id="room2frequency"></span></td><td><span id="room2current"></span></td><td><span id="room2power"></span></td>
+            </tr>
+        </table>
         <div id="subscribe_messages"></div>
         <script type="text/javascript" charset="utf-8">
           $(document).ready(function() {
@@ -14,8 +27,23 @@
             // listen for mqtt_message events
             // when a new message is received, log and append the data to the page
             socket.on('mqtt_index', function(data) {
+                $('#lastmessage').html(new Date());
                 if (data['topic'] == 'monitor/datetime/localtime') {
                     $('#localtime').html(data['payload']);
+                }
+                for (let room = 1; room < 3; room++) {
+                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/voltage/value') {
+                        $('#room' + room + 'voltage').html(data['payload']);
+                    }
+                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/frequency/value') {
+                        $('#room' + room + 'frequency').html(data['payload']);
+                    }
+                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/current/value') {
+                        $('#room' + room + 'current').html(data['payload']);
+                    }
+                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/activepower/value') {
+                        $('#room' + room + 'power').html(data['payload']);
+                    }
                 }
             })
           });

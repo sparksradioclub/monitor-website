@@ -30,7 +30,7 @@ def handle_mqtt_message(client, userdata, message):
     )
     # emit a mqtt_message event to the socket containing the message data
     socketio.emit('mqtt_all', data=data)
-    if message.topic in ["monitor/datetime/localtime"]:
+    if message.topic in ["monitor/datetime/localtime"] or message.topic.startswith("power/"):
         socketio.emit('mqtt_index', data=data)
 
 @app.route('/')
