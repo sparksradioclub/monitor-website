@@ -29,7 +29,7 @@ def handle_mqtt_message(client, userdata, message):
         payload=message.payload.decode()
     )
     # emit a mqtt_message event to the socket containing the message data
-    socketio.emit('mqtt_message', data=data)
+    socketio.emit('mqtt_all', data=data)
 
 @app.route('/')
 def index():

@@ -12,7 +12,7 @@
 
             // listen for mqtt_message events
             // when a new message is received, log and append the data to the page
-            socket.on('mqtt_message', function(data) {
+            socket.on('mqtt_all', function(data) {
               console.log(data);
               var text = '<b>' + data['topic'] + '</b> ' + data['payload'];
               $('#subscribe_messages').append(text + '<br>');
