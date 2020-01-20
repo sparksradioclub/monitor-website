@@ -9,7 +9,7 @@ function indexStartup() {
         } else {
             $('#' + spanid).html(val + ' <small><small>' + suffix + '</small></small>');
             if (sparkVals[spanid] == undefined) {
-                sparkVals[spanid] = [0];
+                sparkVals[spanid] = [];
             }
             if (sparkVals[spanid].length > 30) {
                 sparkVals[spanid].shift();
@@ -26,9 +26,14 @@ function indexStartup() {
 	        });
 	    };
 
+    var messages = 0;
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     // listen for mqtt_message events
     socket.on('mqtt_index', function(data) {
+        messages++;
+        if (messages > 10) {
+            $('#pleasewait').hide();
+        }
         $('#lastmessage').html(new Date());
         if (data['topic'] == 'monitor/connectivity/externalip/ipv4') {
             $('#externalipipv4').html(data['payload']);
