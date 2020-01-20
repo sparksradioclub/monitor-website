@@ -20,10 +20,10 @@
                 <th>Cabin</th><th>Room</th><th>Voltage</th><th>Frequency</th><th>Current</th><th>Power</th><th>Cumulative</th>
             </tr>
             <tr>
-                <td>Cabin 2</td><td>Radio room 1</td><td><span id="room1voltage"></span></td><td><span id="room1frequency"></span></td><td><span id="room1current"></span></td><td><span id="room1power"></span></td><td></td>
+                <td>Cabin 2</td><td>Radio room 1</td><td><span id="room1voltage"></span><span id="room1voltagesparkline"></span></td><td><span id="room1frequency"></span></td><td><span id="room1current"></span><span id="room1currentsparkline"></span></td><td><span id="room1power"></span><span id="room1powersparkline"></span></td><td></td>
             </tr>
             <tr>
-                <td>Cabin 2</td><td>Radio room 2</td><td><span id="room2voltage"></span></td><td><span id="room2frequency"></span></td><td><span id="room2current"></span></td><td><span id="room2power"></span></td><td></td>
+                <td>Cabin 2</td><td>Radio room 2</td><td><span id="room2voltage"></span><span id="room2voltagesparkline"></span></td><td><span id="room2frequency"></span></td><td><span id="room2current"></span><span id="room2currentsparkline"></span></td><td><span id="room2power"></span><span id="room2powersparkline"></span></td><td></td>
             </tr>
         </table>
         <p>&nbsp;</p>
@@ -69,6 +69,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sparklines/2.1.2/jquery.sparkline.min.js"></script>
         <script type="text/javascript" src="/static/mw0sml.monitor.js"></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
