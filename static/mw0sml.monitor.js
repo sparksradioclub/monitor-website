@@ -30,10 +30,12 @@ function indexStartup() {
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port, {'reconnection': true});
     // listen for mqtt_message events
     socket.on('mqtt_index', function(data) {
+
         messages++;
         if (messages > 10) {
             $('#pleasewait').hide();
         }
+        $('#messagecount').html(messages);
         for (let room = 1; room < 3; room++) {
             if (data['topic'] == 'power/meters/cabin2/room' + room + '/voltage/value') {
                 updateLiveCell('room' + room + 'voltage', data['payload'], 1, 'volts', true);
