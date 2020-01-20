@@ -34,14 +34,6 @@ function indexStartup() {
         if (messages > 10) {
             $('#pleasewait').hide();
         }
-        $('#lastmessage').html(new Date());
-        if (data['topic'] == 'monitor/connectivity/externalip/ipv4') {
-            $('#externalipipv4').html(data['payload']);
-        }
-
-        if (data['topic'] == 'monitor/datetime/localtime') {
-            $('#localtime').html(data['payload']);
-        }
         for (let room = 1; room < 3; room++) {
             if (data['topic'] == 'power/meters/cabin2/room' + room + '/voltage/value') {
                 updateLiveCell('room' + room + 'voltage', data['payload'], 1, 'volts', true);

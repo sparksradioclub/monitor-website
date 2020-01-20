@@ -18,10 +18,16 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Website</a>
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/mqtt_all/">Raw MQTT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://sparks.btck.co.uk/">Website</a>
           </li>
         </ul>
       </div>
@@ -36,9 +42,9 @@
         </div>
 
         <div class="container">
-            <h3>Power meters</h3>
+            <h4>Power meters</h4>
             <p><small>We have DIN rail based power monitors connected inline to the feeds for each room. These are monitored every 10 seconds using RS485.</small></p>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-sm">
                 <thead>
                     <th>Cabin</th><th>Room</th><th>Voltage</th><th>Frequency</th><th>Current</th><th>Power</th><th>Cumulative</th>
                 </thead>
@@ -54,9 +60,9 @@
         </div>
 
         <div class="container">
-            <h3>Environment</h3>
+            <h4>Environment</h4>
             <p><small>5 small temperature and humidity sensors a polled every 10 seconds also via RS485.</small></p>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-sm">
                 <thead>
                    <th>Cabin</th><th>Room</th><th>Temperature</th><th>Humidity</th>
                 </thead>
@@ -78,9 +84,9 @@
         </div>
 
         <div class="container">
-            <h3>Doors</h3>
+            <h4>Doors</h4>
             <p><small>The doors are fitted with dry contact reed switches</small></p>
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover table-sm">
                 <thead>
                    <th>Cabin</th><th>Door</th><th>Door state</th><th>Last changed</th>
                 </thead>
@@ -99,15 +105,6 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-
-        <div class="container">
-            <p><b>Last MQTT message</b>: <span id="lastmessage"></span></p>
-            <p><b>Local time</b>: <span id="localtime"></span></p>
-            <p><b>Public IPv4 address</b>: <span id="externalipipv4"></span></p>
-        </div>
-        <div class="container">
-            <p>&nbsp;</p>
         </div>
     </main>
 

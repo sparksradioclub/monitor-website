@@ -36,7 +36,11 @@ def handle_mqtt_message(client, userdata, message):
 def index():
     return render_template('index.html')
 
-@app.route('/mqtt_all')
+@app.route('/about/')
+def about():
+    return render_template('about.html')
+
+@app.route('/mqtt_all/')
 def mqtt_all():
     return render_template('mqtt_all.html')
 
