@@ -27,7 +27,7 @@ function indexStartup() {
 	    };
 
     var messages = 0;
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port, {'reconnection': true});
     // listen for mqtt_message events
     socket.on('mqtt_index', function(data) {
         messages++;
@@ -48,5 +48,7 @@ function indexStartup() {
                 updateLiveCell('room' + room + 'power', data['payload'], 2, 'watts', true);
             }
         }
-    })
+    });
+
+    socket.on('disconnect', function (){console.log('socketio disconnected')});
 }
