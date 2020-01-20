@@ -19,7 +19,6 @@ socketio = SocketIO(app)
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
-    print(os.environ["MQTT_BROKER_URL"])
     mqtt.subscribe('#')
 
 @mqtt.on_message()
@@ -30,7 +29,7 @@ def handle_mqtt_message(client, userdata, message):
     )
     # emit a mqtt_message event to the socket containing the message data
     socketio.emit('mqtt_all', data=data)
-    if message.topic in ["monitor/datetime/localtime"] or message.topic.startswith("power/"):
+    if message.topic in ["monitor/connectivity", "monitor/datetime/localtime"] or message.topic.startswith("power/"):
         socketio.emit('mqtt_index', data=data)
 
 @app.route('/')

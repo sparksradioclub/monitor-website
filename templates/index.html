@@ -1,52 +1,79 @@
-<html>
+<!doctype html>
+<html lang="en">
     <head>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>MW0SML Sparks monitor</title>
     </head>
     <body>
-        <h2>MW0SML - Sparks monitor</h2>
+        <h1>MW0SML - Sparks monitor</h1>
+        <p>After the page loads please wait upto 10 seconds for all the data to be appear, values are pushed in realtime via a websocket.</p>
+        <p>&nbsp;</p>
         <p><b>Last MQTT message</b>: <span id="lastmessage"></span></p>
         <p><b>Local time</b>: <span id="localtime"></span></p>
-
+        <p><b>Public IPv4 address</b>: <span id="externalipipv4"></span></p>
+        <p>&nbsp;</p>
+        <h3>Power usage</h3>
         <table border="1">
             <tr>
-                <th>Cabin</th><th>Room</th><th>Voltage</th><th>Frequency</th><th>Current</th><th>Power</th>
+                <th>Cabin</th><th>Room</th><th>Voltage</th><th>Frequency</th><th>Current</th><th>Power</th><th>Cumulative</th>
             </tr>
             <tr>
-                <td>Cabin 2</td><td>Radio room 1</td><td><span id="room1voltage"></span></td><td><span id="room1frequency"></span></td><td><span id="room1current"></span></td><td><span id="room1power"></span></td>
+                <td>Cabin 2</td><td>Radio room 1</td><td><span id="room1voltage"></span></td><td><span id="room1frequency"></span></td><td><span id="room1current"></span></td><td><span id="room1power"></span></td><td></td>
             </tr>
             <tr>
-                <td>Cabin 2</td><td>Radio room 2</td><td><span id="room2voltage"></span></td><td><span id="room2frequency"></span></td><td><span id="room2current"></span></td><td><span id="room2power"></span></td>
+                <td>Cabin 2</td><td>Radio room 2</td><td><span id="room2voltage"></span></td><td><span id="room2frequency"></span></td><td><span id="room2current"></span></td><td><span id="room2power"></span></td><td></td>
             </tr>
         </table>
-        <div id="subscribe_messages"></div>
-        <script type="text/javascript" charset="utf-8">
-          $(document).ready(function() {
-            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+        <p>&nbsp;</p>
+        <h3>Doors</h3>
+        <table border="1">
+            <tr>
+                <th>Cabin</th><th>Room</th><th>Door state</th><th>Last change</th>
+            </tr>
+            <tr>
+                <td>Cabin 1</td><td>External door</td><td><span id="cabin2room1doorstate"></span></td><td><span id="cabin2room1doorchanged"></span></td>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>External door</td><td><span id="cabin2room1doorstate"></span></td><td><span id="cabin2room1doorchanged"></span></td>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>Radio room 1</td><td><span id="cabin2room1doorstate"></span></td><td><span id="cabin2room1doorchanged"></span></td>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>Radio room 1</td><td><span id="cabin2room1doorstate"></span></td><td><span id="cabin2room1doorchanged"></span></td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+        <h3>Environmental</h3>
+        <table border="1">
+            <tr>
+                <th>Cabin</th><th>Room</th><th>Temperature</th><th>Humidity</th>
+            </tr>
+            <tr>
+                <td>Cabin 1</td><td>Main room</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>Entrance</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>Radio room 1</td><td></td><td></td>
+            </tr>
+            <tr>
+                <td>Cabin 2</td><td>Radio room 2</td><td></td><td></td>
+            </tr>
+        </table>
 
-            // listen for mqtt_message events
-            // when a new message is received, log and append the data to the page
-            socket.on('mqtt_index', function(data) {
-                $('#lastmessage').html(new Date());
-                if (data['topic'] == 'monitor/datetime/localtime') {
-                    $('#localtime').html(data['payload']);
-                }
-                for (let room = 1; room < 3; room++) {
-                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/voltage/value') {
-                        $('#room' + room + 'voltage').html(data['payload']);
-                    }
-                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/frequency/value') {
-                        $('#room' + room + 'frequency').html(data['payload']);
-                    }
-                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/current/value') {
-                        $('#room' + room + 'current').html(data['payload']);
-                    }
-                    if (data['topic'] == 'power/meters/cabin2/room' + room + '/activepower/value') {
-                        $('#room' + room + 'power').html(data['payload']);
-                    }
-                }
-            })
-          });
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+        <script type="text/javascript" src="/static/mw0sml.monitor.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                indexStartup();
+            }, false);
         </script>
     </body>
 </html>
