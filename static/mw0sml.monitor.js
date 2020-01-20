@@ -3,7 +3,7 @@ function indexStartup() {
     var sparkVals = {};
 
     var updateLiveCell = function(spanid, value, digits, suffix, sparkline) {
-        var val = Number(Number(String(value)).toFixed(digits));
+        var val = Number(String(value)).toFixed(digits);
         if (sparkline == false) {
             $('#' + spanid).html(val + ' <small><small>' + suffix + '</small></small>');
         } else {
@@ -14,7 +14,7 @@ function indexStartup() {
             if (sparkVals[spanid].length > 30) {
                 sparkVals[spanid].shift();
             }
-            sparkVals[spanid].push(val);
+            sparkVals[spanid].push(Number(val));
             sparklineLeadLine('#' + spanid + 'sparkline', suffix, sparkVals[spanid]);
         }
     };
