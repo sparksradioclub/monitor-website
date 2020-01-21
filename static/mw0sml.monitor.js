@@ -49,6 +49,9 @@ function indexStartup() {
             if (data['topic'] == 'power/meters/cabin2/room' + room + '/activepower/value') {
                 updateLiveCell('room' + room + 'power', data['payload'], 2, 'watts', true);
             }
+            if (data['topic'] == 'power/meters/cabin2/room' + room + '/reactivepower/value') {
+                updateLiveCell('room' + room + 'cumulative', data['payload'], 1, 'kWh', false);
+            }
         }
     });
 
